@@ -182,16 +182,16 @@ If FULL-MODE is not null, run full krita."
       path)))
 
 ;;;###autoload
-(defun org-krita-insert-new-image (output-kra-path desc)
+(defun org-krita-insert-new-image ()
   "Insert new image in current buffer."
-  (interactive
-   (let ((output-kra-path (funcall org-krita-get-new-filepath))
-         (desc (funcall org-krita-get-new-desc)))
-     (list (org-krita-validate-path output-kra-path) desc)))
-  (org-krita-make-new-image output-kra-path)
-  (org-insert-link nil (concat "krita:" output-kra-path) desc)
-  ;; TODO: Enable only the new image
-  (org-krita-enable))
+  (interactive)
+  (let ((output-kra-path (funcall org-krita-get-new-filepath))
+        (desc (funcall org-krita-get-new-desc)))
+    (list (org-krita-validate-path output-kra-path) desc)
+    (org-krita-make-new-image output-kra-path)
+    (org-insert-link nil (concat "krita:" output-kra-path) desc)
+    ;; TODO: Enable only the new image
+    (org-krita-enable)))
 
 ;;;###autoload
 (define-minor-mode org-krita-mode
